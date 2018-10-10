@@ -1,0 +1,23 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.ratpack:ratpack-gradle:1.5.4"
+    }
+}
+
+apply plugin: "io.ratpack.ratpack-java"
+apply plugin: "idea"
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    runtime "org.slf4j:slf4j-simple:1.7.25"
+    compile "io.ratpack:ratpack-rx:1.5.4"
+    compile project(":lopoo-core")
+}
+
+mainClassName = "com.gmjm.async.ratpack.Main"

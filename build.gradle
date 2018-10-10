@@ -23,11 +23,17 @@ subprojects {
     }
 }
 
-project(':lopoo-core') {
+allprojects {
     dependencies {
         implementation "com.github.alaisi.pgasync:postgres-async-driver:0.9"
     }
 }
+
+//project(':lopoo-core') {
+//    dependencies {
+//        implementation "com.github.alaisi.pgasync:postgres-async-driver:0.9"
+//    }
+//}
 
 
 dependencies {
