@@ -10,12 +10,30 @@ import org.slf4j.LoggerFactory;
 import ratpack.jackson.Jackson;
 import ratpack.rx.RxRatpack;
 import ratpack.server.RatpackServer;
+import ratpack.service.Service;
+import ratpack.service.StopEvent;
 
 import java.util.HashSet;
 
 public class Main {
 
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
+    static class DbService implements Service {
+
+        private final Db db;
+
+        DbService(Db db) {
+            this.db = db;
+        }
+
+        @Override
+        public void onStop(StopEvent event) throws Exception {
+            logger.info("stopping db");
+            db.close();
+        }
+    }
+
 
     public static void main(String... args) throws Exception {
         Db db = new ConnectionPoolBuilder()
@@ -25,11 +43,15 @@ public class Main {
             .username("postgres")
             .password("admin123")
             .build();
+
+        DbService dbService = new DbService(db);
+
         TeamRepository teamRepository = new AsyncPostgresTeamRepository(db);
 
         RxRatpack.initialize();
 
         RatpackServer.start(server -> server
+            .registryOf(r -> r.add(dbService))
             .handlers(chain -> chain
                 .get(ctx -> ctx.render("Hello World!"))
                 .get("teams", ctx -> {
@@ -38,10 +60,7 @@ public class Main {
                             set.add(team);
                             return set;
                         })
-                        .subscribe(set -> {
-                            logger.info("Set size: {}", set.size());
-                            ctx.render(Jackson.json(set));
-                        });
+                        .subscribe(set -> ctx.render(Jackson.json(set)));
                 })
             )
         );
