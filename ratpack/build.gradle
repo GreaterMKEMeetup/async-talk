@@ -12,7 +12,6 @@ buildscript {
 }
 
 apply plugin: "io.ratpack.ratpack-java"
-apply plugin: "idea"
 apply plugin: "com.bmuschko.docker-remote-api"
 
 
@@ -23,7 +22,6 @@ repositories {
 dependencies {
     runtime "org.slf4j:slf4j-simple:1.7.25"
     compile "io.ratpack:ratpack-rx:1.5.4"
-    compile project(":lopoo-core")
 }
 
 distZip {
@@ -39,5 +37,8 @@ task buildImage(type: DockerBuildImage) {
     dockerFile = new File("${projectDir}/src/docker/Dockerfile")
     tag = 'async-talk/ratpack:latest'
 }
+
+buildImage.dependsOn(clean)
+buildImage.dependsOn(distZip)
 
 mainClassName = "com.gmjm.async.ratpack.Main"

@@ -1,4 +1,4 @@
 rootProject.name = 'async-talk'
 include 'lopoo-core'
 include 'ratpack'
-
+include 'spring-reactive'

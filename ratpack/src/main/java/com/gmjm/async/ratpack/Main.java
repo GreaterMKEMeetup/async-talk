@@ -56,11 +56,15 @@ public class Main {
                 .get(ctx -> ctx.render("Hello World!"))
                 .get("teams", ctx -> {
                     RxRatpack.fork(teamRepository.findAll())
-                        .reduce(new HashSet<Team>(), (set, team) -> {
-                            set.add(team);
-                            return set;
-                        })
-                        .subscribe(set -> ctx.render(Jackson.json(set)));
+                        .toList()
+                        .subscribe(teams -> ctx.render(Jackson.json(teams)));
+                })
+                .get("teams/:name", ctx -> {
+                    String teamName = ctx.getPathTokens().get("name").toLowerCase();
+                    RxRatpack.fork(teamRepository.findAll())
+                        .filter(team -> team.getName().toLowerCase().equals(teamName) || team.getName().toLowerCase().contains(teamName))
+                        .toList()
+                        .subscribe(teams -> ctx.render(Jackson.json(teams)));
                 })
             )
         );

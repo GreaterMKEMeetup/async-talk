@@ -5,6 +5,8 @@ plugins {
 group 'com.gmjm.async'
 version '1.0-SNAPSHOT'
 
+apply plugin: "idea"
+
 sourceCompatibility = 1.8
 
 repositories {
@@ -26,6 +28,7 @@ subprojects {
 allprojects {
     dependencies {
         implementation "com.github.alaisi.pgasync:postgres-async-driver:0.9"
+        compile project(":lopoo-core")
     }
 }
 

@@ -22,7 +22,7 @@ public class AsyncPostgresTeamRepositoryITTests {
     public static void setupDb() throws Exception {
             db = new ConnectionPoolBuilder()
                 .hostname("localhost")
-                .port(65432)
+                .port(5432)
                 .database("baseball")
                 .username("postgres")
                 .password("admin123")
