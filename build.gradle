@@ -32,12 +32,6 @@ allprojects {
     }
 }
 
-//project(':lopoo-core') {
-//    dependencies {
-//        implementation "com.github.alaisi.pgasync:postgres-async-driver:0.9"
-//    }
-//}
-
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
