@@ -27,6 +27,7 @@ repositories {
 dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-webflux')
 	implementation('io.reactivex:rxjava-reactive-streams')
+	implementation project(":lopoo-core")
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	testImplementation('io.projectreactor:reactor-test')
 }

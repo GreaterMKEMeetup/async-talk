@@ -1,6 +1,6 @@
 package com.gmjm.async.servlet.springweb;
 
-import com.gmjm.async.lopoo.team.Team;
+import com.gmjm.async.team.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class SpringWebApplication {
@@ -36,10 +35,7 @@ public class SpringWebApplication {
 		@GetMapping("/teams/{name}")
 		public List<Team> findTeam(@PathVariable("name") String name) {
 			String lowerCaseName = name.toLowerCase();
-			return teamRepository.findAll()
-				.stream()
-				.filter(team -> team.getName().toLowerCase().equals(lowerCaseName) || team.getName().toLowerCase().contains(lowerCaseName))
-				.collect(Collectors.toList());
+			return teamRepository.findByTeamName(name);
 		}
 
 	}

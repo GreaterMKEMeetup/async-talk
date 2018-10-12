@@ -2,9 +2,8 @@ package com.gmjm.async.lopoo;
 
 import com.github.pgasync.ConnectionPoolBuilder;
 import com.github.pgasync.Db;
-import com.gmjm.async.lopoo.team.db.AsyncPostgresTeamRepository;
-import com.gmjm.async.lopoo.team.Team;
-import com.gmjm.async.lopoo.team.TeamRepository;
+import com.gmjm.async.team.Team;
+import com.gmjm.async.team.TeamRepository;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;

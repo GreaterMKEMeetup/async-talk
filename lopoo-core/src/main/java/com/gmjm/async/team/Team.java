@@ -1,4 +1,4 @@
-package com.gmjm.async.lopoo.team;
+package com.gmjm.async.team;
 
 public class Team {
 

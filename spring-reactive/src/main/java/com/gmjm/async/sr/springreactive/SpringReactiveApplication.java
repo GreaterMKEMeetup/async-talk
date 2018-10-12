@@ -2,23 +2,19 @@ package com.gmjm.async.sr.springreactive;
 
 import com.github.pgasync.ConnectionPoolBuilder;
 import com.github.pgasync.Db;
-import com.gmjm.async.lopoo.team.Team;
-import com.gmjm.async.lopoo.team.TeamRepository;
-import com.gmjm.async.lopoo.team.db.AsyncPostgresTeamRepository;
+import com.gmjm.async.team.Team;
+import com.gmjm.async.team.TeamRepository;
 import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
 import rx.Observable;
 import rx.RxReactiveStreams;
-import rx.Subscription;
 
 @SpringBootApplication
 public class SpringReactiveApplication {
@@ -52,11 +48,6 @@ public class SpringReactiveApplication {
             return RxReactiveStreams.toPublisher(teamObservable);
         }
 
-	}
-
-	@Bean
-	public TeamRepository teamRepository(Db db) {
-		return new AsyncPostgresTeamRepository(db);
 	}
 
 	@Bean

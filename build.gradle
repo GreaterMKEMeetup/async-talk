@@ -28,7 +28,6 @@ subprojects {
 allprojects {
     dependencies {
         implementation "com.github.alaisi.pgasync:postgres-async-driver:0.9"
-        compile project(":lopoo-core")
     }
 }
 

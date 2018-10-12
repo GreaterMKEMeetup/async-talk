@@ -27,6 +27,7 @@ repositories {
 dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	implementation('org.springframework.boot:spring-boot-starter-jdbc')
+    implementation project(":lopoo-core")
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	runtimeOnly('org.postgresql:postgresql')
 }

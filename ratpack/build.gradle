@@ -12,6 +12,7 @@ buildscript {
 }
 
 apply plugin: "io.ratpack.ratpack-java"
+apply plugin: "io.ratpack.ratpack-spring-boot"
 apply plugin: "com.bmuschko.docker-remote-api"
 
 
@@ -21,7 +22,9 @@ repositories {
 
 dependencies {
     runtime "org.slf4j:slf4j-simple:1.7.25"
-    compile "io.ratpack:ratpack-rx:1.5.4"
+    implementation "com.zaxxer:HikariCP:3.2.0"
+    implementation project(":lopoo-core")
+    runtimeOnly('org.postgresql:postgresql:42.2.4')
 }
 
 distZip {
@@ -35,7 +38,7 @@ import com.bmuschko.gradle.docker.tasks.image.*
 task buildImage(type: DockerBuildImage) {
     inputDir = new File("${projectDir}")
     dockerFile = new File("${projectDir}/src/docker/Dockerfile")
-    tag = 'async-talk/ratpack:latest'
+    tag = 'async-talk/ratpack:v2'
 }
 
 buildImage.dependsOn(clean)
